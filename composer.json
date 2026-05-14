@@ -1,0 +1,73 @@
+{
+    "name": "abduns/hugeicons-flux",
+    "description": "Use any Hugeicons icon as a native <flux:icon.hugeicon.*> component in Flux UI — the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "hugeicons",
+        "flux",
+        "fluxui",
+        "livewire",
+        "icons",
+        "blade",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Abduns",
+            "email": "abdun@swanagata.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/filesystem": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "livewire/flux": "^2.0",
+        "symfony/process": "^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "larastan/larastan": "^3.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dunn\\HugeiconsFlux\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dunn\\HugeiconsFlux\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dunn\\HugeiconsFlux\\Providers\\HugeiconsFluxServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "stan": "phpstan analyse --memory-limit=512M",
+        "fix": "php-cs-fixer fix",
+        "lint": "php-cs-fixer fix --dry-run --diff",
+        "ci": [
+            "@lint",
+            "@stan",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
