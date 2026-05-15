@@ -3,9 +3,9 @@
 Use any [Hugeicons](https://hugeicons.com) icon as a native Flux UI component:
 
 ```blade
-<flux:icon.hugeicon.home-01 />
-<flux:icon.hugeicon.search-01 variant="solid-rounded" class="size-8 text-amber-500" />
-<flux:button icon="hugeicon.notification-01">Alerts</flux:button>
+<flux:icon.hugeicons.home-01 />
+<flux:icon.hugeicons.search-01 variant="solid-rounded" class="size-8 text-amber-500" />
+<flux:button icon="hugeicons.notification-01">Alerts</flux:button>
 ```
 
 The free **Stroke Rounded** set (5,100+ icons) is bundled — it works the moment
@@ -26,7 +26,7 @@ free **Stroke Rounded** set (5,100+ icons) is immediately available across your
 whole app. Verify by rendering:
 
 ```blade
-<flux:icon.hugeicon.home-01 class="size-8" />
+<flux:icon.hugeicons.home-01 class="size-8" />
 ```
 
 That's the entire free-tier setup.
@@ -35,19 +35,19 @@ That's the entire free-tier setup.
 
 ## Usage
 
-Every icon is `flux:icon.hugeicon.{name}`, where `{name}` is the kebab-case
+Every icon is `flux:icon.hugeicons.{name}`, where `{name}` is the kebab-case
 Hugeicons name (`Home01Icon` → `home-01`, `AiSearch02Icon` → `ai-search-02`).
 
 ```blade
 {{-- Default --}}
-<flux:icon.hugeicon.home-01 />
+<flux:icon.hugeicons.home-01 />
 
 {{-- Sizing & colour — like any Flux icon --}}
-<flux:icon.hugeicon.home-01 class="size-10 text-blue-500" />
+<flux:icon.hugeicons.home-01 class="size-10 text-blue-500" />
 
 {{-- As an `icon` prop on other Flux components --}}
-<flux:button icon="hugeicon.calendar-03" />
-<flux:navlist.item icon="hugeicon.dashboard-square-01">Dashboard</flux:navlist.item>
+<flux:button icon="hugeicons.calendar-03" />
+<flux:navlist.item icon="hugeicons.dashboard-square-01">Dashboard</flux:navlist.item>
 ```
 
 ### Variants
@@ -63,7 +63,7 @@ The `variant` prop accepts the real Hugeicons style names, **plus** Flux's own
 
 If an icon has not been built with a requested style (e.g. you only have the
 free set), the `variant` gracefully falls back to `stroke-rounded` — so
-`<flux:button icon="hugeicon.home-01" />` never throws.
+`<flux:button icon="hugeicons.home-01" />` never throws.
 
 ---
 
@@ -127,7 +127,7 @@ php artisan hugeicons:build
 php artisan hugeicons:build home-01 search-01 notification-01
 ```
 
-This writes Blade files into `resources/views/flux/icon/hugeicon/` in your app.
+This writes Blade files into `resources/views/flux/icon/hugeicons/` in your app.
 Flux resolves your app's own `resources/views/flux` path *before* this package,
 so your generated files transparently override the bundled free icons. Commit
 them — they are your project's chosen icons.
@@ -140,7 +140,7 @@ packages — it does not need the licence key (that was only for `npm install`).
 | Argument / option | Description                                                               |
 | ----------------- | ------------------------------------------------------------------------- |
 | `icons` (args)    | Specific icons to build, e.g. `home-01 search-01`. Builds all if omitted.  |
-| `--target=`       | Output directory. Default: `resources/views/flux/icon/hugeicon`.           |
+| `--target=`       | Output directory. Default: `resources/views/flux/icon/hugeicons`.           |
 | `--node-modules=` | Path to `node_modules`. Default: the application base path.                |
 | `--styles=`       | Limit to specific styles, e.g. `--styles=solid-rounded`. Repeatable.       |
 | `--force`         | Overwrite icons that already exist.                                        |
@@ -177,7 +177,7 @@ note to match the exact `@hugeicons-pro/*` packages your project uses.
 ## How it works
 
 - The service provider registers the package's bundled icons into Flux's `flux`
-  anonymous-component namespace under the `hugeicon` prefix.
+  anonymous-component namespace under the `hugeicons` prefix.
 - Registration is deferred until all providers have booted, so your app's own
   `resources/views/flux` path keeps priority — meaning any icon you generate (or
   hand-edit) in your app overrides the bundled version of the same name.

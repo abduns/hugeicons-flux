@@ -1,6 +1,6 @@
 {
     "name": "abduns/hugeicons-flux",
-    "description": "Use any Hugeicons icon as a native <flux:icon.hugeicon.*> component in Flux UI — the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.",
+    "description": "Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI — the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.",
     "type": "library",
     "license": "MIT",
     "keywords": [

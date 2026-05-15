@@ -26,7 +26,7 @@ final class BuildIconsCommand extends Command
 {
     protected $signature = 'hugeicons:build
         {icons?* : Icon names to build (kebab-case, e.g. home-01). Builds every icon when omitted.}
-        {--target= : Directory the Blade files are written to. Defaults to resources/views/flux/icon/hugeicon.}
+        {--target= : Directory the Blade files are written to. Defaults to resources/views/flux/icon/hugeicons.}
         {--node-modules= : Path to the node_modules directory. Defaults to the application base path.}
         {--styles=* : Limit generation to specific Hugeicons styles (e.g. solid-rounded). Defaults to every installed style.}
         {--force : Overwrite icons that already exist.}';
@@ -200,8 +200,8 @@ final class BuildIconsCommand extends Command
         }
 
         return function_exists('resource_path')
-            ? resource_path('views/flux/icon/hugeicon')
-            : getcwd().'/resources/views/flux/icon/hugeicon';
+            ? resource_path('views/flux/icon/hugeicons')
+            : getcwd().'/resources/views/flux/icon/hugeicons';
     }
 
     /**

@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 - `HugeiconsFluxServiceProvider` registers the bundled icons into Flux's `flux`
-  component namespace under the `hugeicon` prefix.
+  component namespace under the `hugeicons` prefix.
 - `hugeicons:build` Artisan command generates Flux icon components from the
   installed `@hugeicons/core-free-icons` and `@hugeicons-pro/core-*` packages.
 - Bundled free **Stroke Rounded** icon set (5,100+ icons).

@@ -1,6 +1,6 @@
 ---
 name: hugeicons-flux
-description: "Use when adding or using a Hugeicons icon — any <flux:icon.hugeicon.*> component, an icon prop like icon=\"hugeicon...\", or when a UI needs an icon that is not in Heroicons or Lucide. Covers resolving the correct Hugeicons name, checking what is already available, and generating Pro-style icons on demand with `php artisan hugeicons:build` so the repo stays lean. Do not use for Heroicons or Lucide icons, which Flux handles natively."
+description: "Use when adding or using a Hugeicons icon — any <flux:icon.hugeicons.*> component, an icon prop like icon=\"hugeicons...\", or when a UI needs an icon that is not in Heroicons or Lucide. Covers resolving the correct Hugeicons name, checking what is already available, and generating Pro-style icons on demand with `php artisan hugeicons:build` so the repo stays lean. Do not use for Heroicons or Lucide icons, which Flux handles natively."
 license: MIT
 metadata:
   author: abduns
@@ -9,8 +9,8 @@ metadata:
 # Hugeicons for Flux
 
 This app uses the `abduns/hugeicons-flux` package. Icons are Flux components
-named `<flux:icon.hugeicon.{name}>` and work anywhere a Flux icon does
-(`<flux:button icon="hugeicon.{name}">`, `<flux:navlist.item icon="...">`, etc.).
+named `<flux:icon.hugeicons.{name}>` and work anywhere a Flux icon does
+(`<flux:button icon="hugeicons.{name}">`, `<flux:navlist.item icon="...">`, etc.).
 
 ## The lean rule (read this first)
 
@@ -28,7 +28,7 @@ Icon names are kebab-case (`home-01`, `ai-search-02`, `notification-01`). Do not
 guess them. The bundled icon files are the canonical name index — grep them:
 
 ```bash
-ls vendor/abduns/hugeicons-flux/resources/views/flux/icon/hugeicon/ | grep -i search
+ls vendor/abduns/hugeicons-flux/resources/views/flux/icon/hugeicons/ | grep -i search
 ```
 
 If several candidates exist (`home`, `home-01`, `home-02`, …), pick by intent or
@@ -47,7 +47,7 @@ Only when a Pro style is needed. First check if it is already built into this
 repo:
 
 ```bash
-test -f resources/views/flux/icon/hugeicon/{name}.blade.php && echo exists || echo missing
+test -f resources/views/flux/icon/hugeicons/{name}.blade.php && echo exists || echo missing
 ```
 
 If missing, build that one icon (fast, ~1s) — build it automatically, no need to
@@ -60,7 +60,7 @@ php artisan hugeicons:build {name}
 Build several at once when you know you need them:
 `php artisan hugeicons:build home-01 search-01 notification-01`.
 
-This writes `resources/views/flux/icon/hugeicon/{name}.blade.php` into this repo
+This writes `resources/views/flux/icon/hugeicons/{name}.blade.php` into this repo
 with every installed style. Flux resolves the repo's own `resources/views/flux`
 path **before** the package, so the built file overrides the bundled free
 version. Commit these generated files — they are the project's chosen Pro icons.
@@ -85,14 +85,14 @@ the affected icons.
 ## Step 4 — Use the component
 
 ```blade
-<flux:icon.hugeicon.home-01 />                              {{-- default --}}
-<flux:icon.hugeicon.home-01 variant="solid-rounded" class="size-8 text-blue-500" />
-<flux:button icon="hugeicon.notification-01">Alerts</flux:button>
+<flux:icon.hugeicons.home-01 />                              {{-- default --}}
+<flux:icon.hugeicons.home-01 variant="solid-rounded" class="size-8 text-blue-500" />
+<flux:button icon="hugeicons.notification-01">Alerts</flux:button>
 ```
 
 ## Adding a brand-new icon mid-task
 
 When building a UI and you reach for an icon: resolve the name (Step 1), and if
 the design only needs the default style, just drop in
-`<flux:icon.hugeicon.{name} />` — done. Reach for `hugeicons:build` only when a
+`<flux:icon.hugeicons.{name} />` — done. Reach for `hugeicons:build` only when a
 Pro style is on screen.
