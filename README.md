@@ -2,7 +2,7 @@
 
 Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI — the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.
 
-[![Tests](https://github.com/abduns/hugeicons-flux/actions/workflows/tests.yml/badge.svg)](https://github.com/abduns/hugeicons-flux/actions)
+[![Tests](https://github.com/abduns/hugeicons-flux/actions/workflows/ci.yml/badge.svg)](https://github.com/abduns/hugeicons-flux/actions)
 [![Version](https://img.shields.io/packagist/v/abduns/hugeicons-flux.svg)](https://packagist.org/packages/abduns/hugeicons-flux)
 [![Downloads](https://img.shields.io/packagist/dt/abduns/hugeicons-flux.svg)](https://packagist.org/packages/abduns/hugeicons-flux)
 [![License](https://img.shields.io/packagist/l/abduns/hugeicons-flux.svg)](LICENSE.md)
