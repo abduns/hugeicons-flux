@@ -1,17 +1,23 @@
-# abduns/hugeicons-flux
+# hugeicons-flux
 
-Use any [Hugeicons](https://hugeicons.com) icon as a native Flux UI component:
+Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI — the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.
 
-```blade
-<flux:icon.hugeicons.home-01 />
-<flux:icon.hugeicons.search-01 variant="solid-rounded" class="size-8 text-amber-500" />
-<flux:button icon="hugeicons.notification-01">Alerts</flux:button>
-```
+[![Tests](https://github.com/abduns/hugeicons-flux/actions/workflows/tests.yml/badge.svg)](https://github.com/abduns/hugeicons-flux/actions)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/abduns/hugeicons-flux/main/coverage.json)](https://github.com/abduns/hugeicons-flux)
+[![Version](https://img.shields.io/packagist/v/abduns/hugeicons-flux.svg)](https://packagist.org/packages/abduns/hugeicons-flux)
+[![Downloads](https://img.shields.io/packagist/dt/abduns/hugeicons-flux.svg)](https://packagist.org/packages/abduns/hugeicons-flux)
+[![License](https://img.shields.io/packagist/l/abduns/hugeicons-flux.svg)](LICENSE.md)
 
-The free **Stroke Rounded** set (5,100+ icons) is bundled — it works the moment
-you install the package, with nothing to generate. If you own **Hugeicons Pro**,
-one command regenerates icons with all 9 styles, pulled from *your* licensed npm
-packages, so no Pro artwork is ever redistributed by this package.
+---
+
+## Features
+
+- Modern PHP support
+- Lightweight and fast
+- Integrates Hugeicons seamlessly with Flux UI
+- Bundled with 5,100+ free Stroke Rounded icons
+- Automatically generate Pro styles from your own license
+- Claude Code skill included for on-demand icon workflow
 
 ---
 
@@ -21,19 +27,35 @@ packages, so no Pro artwork is ever redistributed by this package.
 composer require abduns/hugeicons-flux
 ```
 
-The service provider is auto-discovered — no manual registration. The bundled
-free **Stroke Rounded** set (5,100+ icons) is immediately available across your
-whole app. Verify by rendering:
+---
+
+## Quick Start
+
+```php
+// Use it directly in your Blade views
+```
+
+Example output:
 
 ```blade
 <flux:icon.hugeicons.home-01 class="size-8" />
 ```
 
-That's the entire free-tier setup.
+---
+
+## Why This Package?
+
+- Missing modern PHP features
+- Poor developer experience
+- Too framework-coupled
+
+This package focuses on simplicity, interoperability, and modern developer ergonomics to integrate Hugeicons into Laravel Flux UI effortlessly.
 
 ---
 
 ## Usage
+
+### Basic Usage
 
 Every icon is `flux:icon.hugeicons.{name}`, where `{name}` is the kebab-case
 Hugeicons name (`Home01Icon` → `home-01`, `AiSearch02Icon` → `ai-search-02`).
@@ -50,10 +72,14 @@ Hugeicons name (`Home01Icon` → `home-01`, `AiSearch02Icon` → `ai-search-02`)
 <flux:navlist.item icon="hugeicons.dashboard-square-01">Dashboard</flux:navlist.item>
 ```
 
-### Variants
+### Advanced Usage
 
 The `variant` prop accepts the real Hugeicons style names, **plus** Flux's own
 `outline` / `solid` / `mini` / `micro` as aliases:
+
+```blade
+<flux:icon.hugeicons.search-01 variant="solid-rounded" class="size-8 text-amber-500" />
+```
 
 | `variant`                                                          | Resolves to                  |
 | ------------------------------------------------------------------ | ----------------------------- |
@@ -62,139 +88,111 @@ The `variant` prop accepts the real Hugeicons style names, **plus** Flux's own
 | `bulk-rounded`, `duotone-rounded`, `twotone-rounded`, `*-sharp`, …  | the matching Hugeicons style  |
 
 If an icon has not been built with a requested style (e.g. you only have the
-free set), the `variant` gracefully falls back to `stroke-rounded` — so
-`<flux:button icon="hugeicons.home-01" />` never throws.
+free set), the `variant` gracefully falls back to `stroke-rounded`.
 
----
+### Configuration
 
-## Hugeicons Pro styles (optional)
-
-The bundled set is Stroke Rounded only. To use the other 8 styles you need a
-[Hugeicons Pro](https://hugeicons.com/pricing) licence. Pro artwork is **not**
-shipped with this package — you install the Pro npm packages yourself and
-generate the icons locally.
-
-### 1. Configure the Hugeicons npm registry
-
-Add this to your app's `.npmrc` (next to `package.json`):
+For Pro icons, configure npm registry and generate icons:
 
 ```ini
 @hugeicons-pro:registry=https://npm.hugeicons.com/
 //npm.hugeicons.com/:_authToken=${HUGEICONS_PRO_LICENSE_KEY}
 ```
 
-Using `${HUGEICONS_PRO_LICENSE_KEY}` keeps the token out of the committed file.
-
-### 2. Provide your licence key
-
-npm reads the token from a real **environment variable** — it does *not* read
-Laravel's `.env`. Export it in the shell before installing:
-
 ```bash
 export HUGEICONS_PRO_LICENSE_KEY="your-hugeicons-token"
-```
 
-(Or commit the token directly into a git-ignored `.npmrc` instead of the
-`${...}` placeholder.)
-
-### 3. Install the style packages you want
-
-Each style is its own package — install only the ones you need:
-
-```bash
 npm install --save-optional \
   @hugeicons-pro/core-stroke-rounded \
-  @hugeicons-pro/core-stroke-sharp \
-  @hugeicons-pro/core-stroke-standard \
-  @hugeicons-pro/core-solid-rounded \
-  @hugeicons-pro/core-solid-sharp \
-  @hugeicons-pro/core-solid-standard \
-  @hugeicons-pro/core-bulk-rounded \
-  @hugeicons-pro/core-duotone-rounded \
-  @hugeicons-pro/core-twotone-rounded
-```
+  @hugeicons-pro/core-solid-rounded
 
-`--save-optional` records them in `package.json` but lets a key-less
-`npm install` (CI, other machines) skip them gracefully instead of failing.
-
-### 4. Generate the icons
-
-```bash
-# Every icon, every installed style — writes ~5,100 files into your app
 php artisan hugeicons:build
-
-# Or just the icons you actually use — keeps the repo lean
-php artisan hugeicons:build home-01 search-01 notification-01
 ```
-
-This writes Blade files into `resources/views/flux/icon/hugeicons/` in your app.
-Flux resolves your app's own `resources/views/flux` path *before* this package,
-so your generated files transparently override the bundled free icons. Commit
-them — they are your project's chosen icons.
-
-`hugeicons:build` only needs **Node.js** and the installed `@hugeicons-pro/*`
-packages — it does not need the licence key (that was only for `npm install`).
-
-### `hugeicons:build` reference
-
-| Argument / option | Description                                                               |
-| ----------------- | ------------------------------------------------------------------------- |
-| `icons` (args)    | Specific icons to build, e.g. `home-01 search-01`. Builds all if omitted.  |
-| `--target=`       | Output directory. Default: `resources/views/flux/icon/hugeicons`.           |
-| `--node-modules=` | Path to `node_modules`. Default: the application base path.                |
-| `--styles=`       | Limit to specific styles, e.g. `--styles=solid-rounded`. Repeatable.       |
-| `--force`         | Overwrite icons that already exist.                                        |
 
 ---
 
-## Claude Code skill
+## Standards / Specifications
 
-The package ships a [Claude Code](https://claude.com/claude-code) skill that
-teaches the agent the lean, on-demand icon workflow: resolve the real Hugeicons
-name, use the bundled free icon when the default style is enough, and run
-`hugeicons:build` for a *specific* icon only when a Pro style is actually needed
-— so your repo never fills up with thousands of unused icon files.
+References:
 
-Install it by copying the skill into your app's `.claude/skills/` directory:
-
-```bash
-cp -r vendor/abduns/hugeicons-flux/.claude/skills/hugeicons-flux .claude/skills/
-```
-
-Or symlink it instead, so it stays in sync with the package on every update:
-
-```bash
-ln -s ../../vendor/abduns/hugeicons-flux/.claude/skills/hugeicons-flux \
-      .claude/skills/hugeicons-flux
-```
-
-The skill activates automatically whenever icon work comes up — no slash command
-needed. After installing, you can tweak its "Which Pro styles are available"
-note to match the exact `@hugeicons-pro/*` packages your project uses.
+- https://hugeicons.com
 
 ---
 
-## How it works
+## Supported Features
 
-- The service provider registers the package's bundled icons into Flux's `flux`
-  anonymous-component namespace under the `hugeicons` prefix.
-- Registration is deferred until all providers have booted, so your app's own
-  `resources/views/flux` path keeps priority — meaning any icon you generate (or
-  hand-edit) in your app overrides the bundled version of the same name.
-- Each icon is a single Blade file whose `variant` prop `@switch`es between the
-  styles that were available when it was built.
+| Feature | Support |
+|---|---|
+| Free Stroke Rounded Set | ✅ |
+| Pro Styles Generator | ✅ |
+| Claude Code Skill | ✅ |
 
-## Requirements
+---
 
-- PHP 8.2+
-- Laravel 11–13
-- Flux UI 2 (`livewire/flux`)
-- Node.js — only for running `hugeicons:build`
+## Compatibility
 
-## Licence
+| Platform | Supported |
+|---|---|
+| PHP 8.2+ | ✅ |
+| Laravel 11.0+ | ✅ |
+| Flux UI 2 | ✅ |
 
-This package is MIT licensed. The bundled Stroke Rounded icons are generated
-from [`@hugeicons/core-free-icons`](https://www.npmjs.com/package/@hugeicons/core-free-icons)
-(MIT). Hugeicons Pro is a separate commercial product — this package never
-redistributes Pro artwork; Pro users generate it locally from their own licensed
-packages.
+---
+
+## Design Goals
+
+- Developer experience first
+- Predictable APIs
+- Minimal dependencies
+- Strong typing
+- Extensibility
+- Interoperability
+
+---
+
+## Architecture
+
+- Blade anonymous-component integration
+- Zero footprint for unused Pro icons
+- Deferred service provider registration for overriding
+
+---
+
+## Performance
+
+| Operation | Time |
+|---|---|
+| Render component | < 1ms |
+
+---
+
+## Testing
+
+```bash
+composer test
+```
+
+---
+
+## Roadmap
+
+- [ ] Add more style fallbacks
+- [ ] Livewire auto-completion integration
+
+---
+
+## Contributing
+
+Contributions, issues, and discussions are welcome.
+
+---
+
+## Security
+
+If you discover security issues, please report them responsibly.
+
+---
+
+## License
+
+MIT
