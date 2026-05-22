@@ -16,7 +16,7 @@ Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI 
 - Integrates Hugeicons seamlessly with Flux UI
 - Bundled with 5,100+ free Stroke Rounded icons
 - Automatically generate Pro styles from your own license
-- Claude Code skill included for on-demand icon workflow
+- Agent Skill included for Laravel Boost, Codex, and Claude Code workflows
 
 ---
 
@@ -39,6 +39,26 @@ Example output:
 ```blade
 <flux:icon.hugeicons.home-01 class="size-8" />
 ```
+
+---
+
+## Laravel Boost
+
+This package ships a Laravel Boost Agent Skill at:
+
+```text
+resources/boost/skills/hugeicons-flux/SKILL.md
+```
+
+Laravel Boost can discover it during `boost:install` or `boost:update --discover`.
+If you want to publish the skill into your application's `.ai/skills` directory
+for customization, run:
+
+```bash
+php artisan hugeicons:boost-skill
+```
+
+Use `--force` to replace an existing local copy.
 
 ---
 
@@ -225,6 +245,7 @@ References:
 |---|---|
 | Free Stroke Rounded Set | ✅ |
 | Pro Styles Generator | ✅ |
+| Laravel Boost Agent Skill | ✅ |
 | Claude Code Skill | ✅ |
 
 ---
@@ -271,13 +292,6 @@ References:
 ```bash
 composer test
 ```
-
----
-
-## Roadmap
-
-- [ ] Add more style fallbacks
-- [ ] Livewire auto-completion integration
 
 ---
 

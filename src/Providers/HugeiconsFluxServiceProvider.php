@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dunn\HugeiconsFlux\Providers;
 
 use Dunn\HugeiconsFlux\Console\BuildIconsCommand;
+use Dunn\HugeiconsFlux\Console\PublishBoostSkillCommand;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,7 +32,10 @@ final class HugeiconsFluxServiceProvider extends ServiceProvider
         });
 
         if ($this->app->runningInConsole()) {
-            $this->commands([BuildIconsCommand::class]);
+            $this->commands([
+                BuildIconsCommand::class,
+                PublishBoostSkillCommand::class,
+            ]);
         }
     }
 
