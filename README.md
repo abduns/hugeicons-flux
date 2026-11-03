@@ -276,7 +276,7 @@ Use `--force` to replace an existing local copy.
 | Requirement | Version |
 | --- | --- |
 | PHP | 8.3+ |
-| Laravel | 11, 12, 13 |
+| Laravel | 12, 13 |
 | Flux UI | 2.x |
 | Node.js | 18+ (only for `hugeicons:build`) |
 

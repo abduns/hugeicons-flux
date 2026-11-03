@@ -32,6 +32,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - An extractor failure in `hugeicons:build` now reports an error and exits
   non-zero instead of throwing an uncaught exception.
 
+### Removed
+
+- **Laravel 11 support.** Laravel 11 is end-of-life and every 11.x release is
+  covered by the unpatched CVE-2026-48019, so Composer 2.9+ refuses to install
+  it by default. Laravel 11 apps keep resolving to 1.0.x.
+
 ### Changed
 
 - CI: Node 22, `actions/checkout@v5`, `actions/setup-node@v5`; dropped the
