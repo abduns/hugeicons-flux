@@ -19,7 +19,8 @@
 @switch($resolved)
 @case('stroke-rounded')
 <svg {{ $attributes->class($classes) }} data-flux-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-    <path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    <path d="M18.9991 19L5 5.00098" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    <path d="M19 5L5.00092 18.999" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
 </svg>
 @break
 @endswitch

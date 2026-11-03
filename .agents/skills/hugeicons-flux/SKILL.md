@@ -14,12 +14,12 @@ named `<flux:icon.hugeicons.{name}>` and work anywhere a Flux icon does
 
 ## The lean rule (read this first)
 
-The package **bundles the full free Stroke Rounded set** (~5,100 icons). They
+The package **bundles the full free Stroke Rounded set** (~6,100 icons). They
 render with **nothing committed to this repo**. Only generate an icon file into
 this repo when a **Pro style** is actually needed for it.
 
 - **Never** run `php artisan hugeicons:build` with no arguments — that dumps all
-  ~5,100 icons into the repo. Always build specific named icons.
+  ~6,100 icons into the repo. Always build specific named icons.
 - Default styling needs **no build at all**.
 
 ## Step 1 — Resolve the icon name
@@ -39,7 +39,7 @@ ask the user. https://hugeicons.com/icons can be used to preview shapes.
 | What's needed | Action |
 | --- | --- |
 | Default look — no `variant`, or `variant="outline"` / `"stroke-rounded"` / `"mini"` / `"micro"` | **No build.** It already renders from the bundled package. Just use the component. |
-| A Pro style — `variant="solid-rounded"`, `"bulk-rounded"`, `"duotone-rounded"`, etc. | Go to Step 3. |
+| A Pro style — `variant="solid-rounded"`, `"bulk-rounded"`, `"duotone-rounded"`, `"duotone-standard"`, etc. | Go to Step 3. |
 
 ## Step 3 — Build the Pro-style icon on demand
 

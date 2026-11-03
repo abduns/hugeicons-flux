@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+# Keep the Composer dist archive lean: ship only what a host app needs.
+/.github             export-ignore
+/tests               export-ignore
+/.gitattributes      export-ignore
+/.gitignore          export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/bin/bundle-icons.sh export-ignore
+/package.json        export-ignore
+/package-lock.json   export-ignore
+/phpstan.neon        export-ignore
+/phpunit.xml.dist    export-ignore
+/testbench.yaml      export-ignore

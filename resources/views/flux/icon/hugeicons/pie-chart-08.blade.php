@@ -22,7 +22,7 @@
     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
     <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" />
     <path d="M3.33984 16.9996L7.66925 14.5" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" />
-    <path d="M20.6596 16.9996L16.3301 14.5" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" />
+    <path d="M16.3301 14.5L20.6596 16.9996" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" />
     <path d="M12 2L12 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
 </svg>
 @break
