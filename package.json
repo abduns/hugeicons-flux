@@ -1,0 +1,8 @@
+{
+    "private": true,
+    "description": "Development-only: pins the Hugeicons free set bundled in resources/views/flux/icon/hugeicons. Run `composer icons:bundle` after bumping.",
+    "type": "module",
+    "devDependencies": {
+        "@hugeicons/core-free-icons": "4.4.0"
+    }
+}

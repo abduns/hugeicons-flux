@@ -50,6 +50,7 @@ final class BuildIconsCommand extends Command
         'solid-standard' => ['solid-standard'],
         'bulk-rounded' => ['bulk-rounded', 'bulk'],
         'duotone-rounded' => ['duotone-rounded', 'duotone'],
+        'duotone-standard' => ['duotone-standard'],
         'twotone-rounded' => ['twotone-rounded', 'twotone'],
     ];
 
@@ -135,7 +136,15 @@ final class BuildIconsCommand extends Command
                 continue;
             }
 
-            $extracted = $this->extract($node, $packages, array_keys($pending));
+            try {
+                $extracted = $this->extract($node, $packages, array_keys($pending));
+            } catch (RuntimeException $e) {
+                $bar->clear();
+                $this->newLine();
+                $this->components->error($e->getMessage());
+
+                return self::FAILURE;
+            }
 
             foreach ($pending as $module => $name) {
                 $styles = $extracted[$module] ?? [];
@@ -286,6 +295,11 @@ final class BuildIconsCommand extends Command
         foreach ($arguments as $argument) {
             $name = $this->toKebab($argument);
 
+            // Accept the JS export name too, e.g. `Home01Icon` => `home-01`.
+            if (! isset($byName[$name]) && str_ends_with($name, '-icon')) {
+                $name = substr($name, 0, -5);
+            }
+
             if (isset($byName[$name])) {
                 $resolved[$byName[$name]] = $name;
             } else {
@@ -380,6 +394,14 @@ final class BuildIconsCommand extends Command
             }
         }
 
+        // Styles this package does not know about yet (e.g. a newly released
+        // Hugeicons Pro style) are still selectable by their own name.
+        foreach ($available as $style) {
+            if (! isset(self::STYLE_ALIASES[$style])) {
+                $groups[$style][] = $style;
+            }
+        }
+
         $arms = '';
 
         foreach ($available as $style) {
@@ -407,16 +429,18 @@ final class BuildIconsCommand extends Command
         $cases = [];
 
         foreach ($available as $style) {
-            $fill = str_starts_with($style, 'stroke-') ? 'none' : 'currentColor';
-
             $elements = '';
 
-            foreach ($styles[$style] as [$tag, $attributes]) {
+            foreach ($this->orderLayers($styles[$style]) as [$tag, $attributes]) {
                 $elements .= '    '.$this->renderElement($tag, $attributes)."\n";
             }
 
+            // Like the official Hugeicons renderers, the root <svg> never paints:
+            // every element carries its own `fill` / `stroke`. A root
+            // `fill="currentColor"` would flood stroke-only layers of the
+            // bulk, duotone and twotone styles.
             $svg = '<svg {{ $attributes->class($classes) }} data-flux-icon aria-hidden="true"'
-                .' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="'.$fill.'">'."\n"
+                .' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">'."\n"
                 .$elements
                 .'</svg>';
 
@@ -424,6 +448,30 @@ final class BuildIconsCommand extends Command
         }
 
         return implode("\n", $cases);
+    }
+
+    /**
+     * Draw secondary (semi-transparent) layers first so the primary layer sits
+     * on top, matching the official Hugeicons renderers. Order is otherwise
+     * preserved.
+     *
+     * @param  list<array{0: string, 1: array<string, scalar>}>  $elements
+     * @return list<array{0: string, 1: array<string, scalar>}>
+     */
+    private function orderLayers(array $elements): array
+    {
+        $secondary = [];
+        $primary = [];
+
+        foreach ($elements as $element) {
+            if (array_key_exists('opacity', $element[1])) {
+                $secondary[] = $element;
+            } else {
+                $primary[] = $element;
+            }
+        }
+
+        return [...$secondary, ...$primary];
     }
 
     /**

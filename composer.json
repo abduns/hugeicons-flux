@@ -1,6 +1,6 @@
 {
     "name": "abduns/hugeicons-flux",
-    "description": "Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI \u2014 the free Stroke Rounded set bundled, or generate all 9 Pro styles from your own Hugeicons licence.",
+    "description": "Use any Hugeicons icon as a native <flux:icon.hugeicons.*> component in Flux UI \u2014 the free Stroke Rounded set bundled, or generate all 10 Pro styles from your own Hugeicons licence.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -56,6 +56,10 @@
         "stan": "phpstan analyse --memory-limit=512M",
         "fix": "php-cs-fixer fix",
         "lint": "php-cs-fixer fix --dry-run --diff",
+        "icons:bundle": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash bin/bundle-icons.sh"
+        ],
         "ci": [
             "@lint",
             "@stan",

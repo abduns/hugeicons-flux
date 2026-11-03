@@ -16,7 +16,7 @@ jobs:
         laravel: ['11.*', '12.*', '13.*']
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -25,18 +25,17 @@ jobs:
           coverage: none
           tools: composer:v2
 
+      # hugeicons:build shells out to Node to read the icon modules. The tests
+      # use the fixture packages in tests/fixtures, so no npm install is needed.
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
-
-      - name: Install npm dependencies
-        run: npm install --ignore-scripts
+          node-version: '22'
 
       - name: Install dependencies
         run: |
           composer require "illuminate/support:${{ matrix.laravel }}" --no-update --no-interaction
-          composer install --prefer-dist --no-progress --no-interaction
+          composer update --prefer-dist --no-progress --no-interaction
 
       - name: Pest
         run: vendor/bin/pest --colors=always
